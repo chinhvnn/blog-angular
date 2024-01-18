@@ -1,0 +1,22 @@
+<div class="login-wrapper">
+  <div class="login-header">Login</div>
+  <div class="login-form">
+    <div class="login-form__email">
+      <input type="text" class="form-control" placeholder="Email" [formControl]="email" />
+      <span class="login-form__email__note"></span>
+    </div>
+    <div class="login-form__password">
+      <input type="password" class="form-control" placeholder="Password" [formControl]="password" />
+      <span class="login-form__password__note"></span>
+    </div>
+    <div class="login-form__remember">
+      <input type="checkbox" id="remember" class="" [formControl]="remember" />
+      <label for="remember">Remember password</label>
+    </div>
+    <div class="login-form__submit-btn">
+      <button type="button" class="button-1" (click)="handleLoginSubmit()">Submit</button>
+    </div>
+  </div>
+  <div class="login-forgot">Forgot email or password</div>
+  <div class="login-need-signup">Signup</div>
+</div>
