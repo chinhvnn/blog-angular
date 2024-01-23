@@ -1,18 +1,16 @@
 import { Injectable } from '@angular/core'
 import { HttpClient } from '@angular/common/http'
-import { httpOptions } from '../common/constant'
-import * as I from '../common/intefaces'
+import * as I from '../common/interfaces'
 import { Observable } from 'rxjs'
+import JWTService from './jwt.service'
 
 @Injectable({ providedIn: 'root' })
 export default class AuthServices {
-  constructor(public http: HttpClient) {}
+  constructor(public http: HttpClient, private readonly jwtService: JWTService) {}
 
   public isAuthenticated(): boolean {
     if (typeof window !== 'undefined') {
-      const token = window.localStorage.getItem('token')
-      console.log('111 token login', token)
-
+      const token = this.jwtService.getToken()
       return !!token
     }
 
@@ -20,6 +18,6 @@ export default class AuthServices {
   }
 
   public login(body: I.ILoginInput): Observable<any> {
-    return this.http.post<any>('login', body, { ...httpOptions }).pipe()
+    return this.http.post<any>('login', body).pipe()
   }
 }

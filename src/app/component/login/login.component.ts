@@ -1,7 +1,9 @@
-import { Component } from '@angular/core'
-import { RouterLink } from '@angular/router'
+import { Component, DestroyRef, inject } from '@angular/core'
+import { Router, RouterLink } from '@angular/router'
 import { FormBuilder, FormControl, ReactiveFormsModule, Validators } from '@angular/forms'
 import AuthServices from '../../services/auth.service'
+import { API_STATUS } from '../../common/constant'
+import JWTService from '../../services/jwt.service'
 
 @Component({
   selector: 'login-page',
@@ -16,27 +18,27 @@ export default class LoginComponent {
   public remember = new FormControl()
   public errors = ''
 
-  constructor(public auth: AuthServices) {}
-
-  ngOnInit(): void {
-    console.log('111 ngOnInit login')
+  constructor(public auth: AuthServices, private readonly router: Router, private readonly jwtService: JWTService) {
+    if (this.auth.isAuthenticated()) {
+      this.router.navigate([''])
+    }
   }
 
   handleLoginSubmit(): void {
-    console.log('111 login submit email', this.email.errors, this.password.errors, this.remember.errors)
-    console.log('111 login submit email', this.email.value, this.password.value, this.remember.value)
     if (this.email.valid && this.password.valid && this.email.value && this.password.value) {
       this.errors = ''
       this.auth
         .login({ email: this.email.value, password: this.password.value, remember: this.remember.value })
         .subscribe((res: any) => {
-          console.log('1111111 resssss', res)
-
-          if (res) {
+          if (res.status === API_STATUS.SUCCESS && res.token) {
+            this.jwtService.saveToken(res.token)
+            this.router.navigate([''])
+          } else {
+            this.errors = res?.message || 'Invalid email or password'
           }
         })
     } else {
-      this.errors = 'Invalid email or password'
+      this.errors = 'Invalid email or password format'
     }
   }
 }

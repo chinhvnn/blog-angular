@@ -1,20 +1,31 @@
 import { Component, SimpleChanges } from '@angular/core'
+import UserService from '../../services/user.services'
+import { API_STATUS } from '../../common/constant'
+import { CommonModule } from '@angular/common'
 
 @Component({
   selector: 'user',
   templateUrl: './user.component.html',
+  imports: [CommonModule],
   standalone: true,
 })
 export default class User {
   public title = 'User'
+  public userData = [] as any
 
-  constructor() {
-    console.log('111 constructor user')
-  }
+  constructor(private readonly userService: UserService) {}
 
   ngOnInit(): void {
-    console.log('111 ngOnInitUser')
+    //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
+    //Add 'implements OnInit' to the class.
+    this.userService.getUsers(1).subscribe((res) => {
+      if (res.status === API_STATUS.SUCCESS && res?.data?.users) {
+        this.userData = res.data.users
+        console.log('111 this.userData', this.userData)
+      }
+    })
   }
+
   ngAfterViewInit(): void {
     //Called after ngAfterContentInit when the component's view has been initialized. Applies to components only.
     //Add 'implements AfterViewInit' to the class.
