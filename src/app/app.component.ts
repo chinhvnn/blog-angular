@@ -1,6 +1,7 @@
 import { Component } from '@angular/core'
 import { CommonModule } from '@angular/common'
 import { RouterOutlet } from '@angular/router'
+import { HttpClientModule } from '@angular/common/http'
 
 @Component({
   selector: 'app-root',
@@ -10,7 +11,5 @@ import { RouterOutlet } from '@angular/router'
   styleUrl: './app.component.scss',
 })
 export class AppComponent {
-  constructor() {
-    console.log('111 app')
-  }
+  constructor() {}
 }

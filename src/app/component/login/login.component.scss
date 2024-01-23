@@ -12,6 +12,13 @@
   .login-form {
     margin-bottom: 20px;
 
+    &__errors {
+      height: 16px;
+      font-size: 12px;
+      color: red;
+    }
+
+    &__errors,
     &__email,
     &__password,
     &__remember {

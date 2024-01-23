@@ -1,6 +1,7 @@
 <div class="login-wrapper">
   <div class="login-header">Login</div>
   <div class="login-form">
+    <div class="login-form__errors">{{ errors }}</div>
     <div class="login-form__email">
       <input type="text" class="form-control" placeholder="Email" [formControl]="email" />
       <span class="login-form__email__note"></span>
