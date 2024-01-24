@@ -13,4 +13,9 @@ export const routes: Routes = [
     loadComponent: () => User,
     canActivate: [AuthGuard],
   },
+  {
+    path: 'user',
+    loadComponent: () => User,
+    canActivate: [AuthGuard],
+  },
 ]

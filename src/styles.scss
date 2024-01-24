@@ -8,6 +8,23 @@
 }
 
 html {
+  .header-wrapper {
+    height: 50px;
+  }
+
+  main {
+    padding-top: 70px;
+
+    .left-sidebar-wrapper {}
+
+    .right-sidebar-wrapper {}
+
+    .content-wrapper {
+      min-height: calc(100vh - 90px);
+    }
+  }
+
+
   .form-control {
     line-height: 1.5;
     padding: 0.375rem 0.75rem;

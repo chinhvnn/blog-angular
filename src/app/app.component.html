@@ -1,1 +1,8 @@
-<router-outlet></router-outlet>
+<header></header>
+<main class="flex">
+  <left-sidebar></left-sidebar>
+  <div class="content-wrapper flex-1 p-8 shadow-lg">
+    <router-outlet></router-outlet>
+  </div>
+  <right-sidebar></right-sidebar>
+</main>
