@@ -6,7 +6,7 @@ import { API_STATUS } from '../../common/constant'
 import JWTService from '../../services/jwt.service'
 
 @Component({
-  selector: 'login-page',
+  selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss',
   imports: [RouterLink, ReactiveFormsModule],

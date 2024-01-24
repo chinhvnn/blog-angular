@@ -17,7 +17,9 @@ html {
 
     .left-sidebar-wrapper {}
 
-    .right-sidebar-wrapper {}
+    .right-sidebar-wrapper {
+      // min-height: calc(100vh - 90px);
+    }
 
     .content-wrapper {
       min-height: calc(100vh - 90px);

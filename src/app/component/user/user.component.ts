@@ -4,7 +4,7 @@ import { API_STATUS } from '../../common/constant'
 import { CommonModule } from '@angular/common'
 
 @Component({
-  selector: 'user',
+  selector: 'app-user',
   templateUrl: './user.component.html',
   imports: [CommonModule],
   standalone: true,
