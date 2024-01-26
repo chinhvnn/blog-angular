@@ -5,11 +5,11 @@ import { CommonModule } from '@angular/common'
 
 @Component({
   selector: 'app-user',
-  templateUrl: './user.component.html',
+  templateUrl: './users.component.html',
   imports: [CommonModule],
   standalone: true,
 })
-export default class User {
+export default class Users {
   public title = 'User'
   public userData = [] as any
 
