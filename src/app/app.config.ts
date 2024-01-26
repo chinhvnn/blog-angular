@@ -4,6 +4,7 @@ import { routes } from './app.routes'
 import { provideClientHydration } from '@angular/platform-browser'
 import { HTTP_INTERCEPTORS, provideHttpClient, withFetch, withInterceptorsFromDi } from '@angular/common/http'
 import ApiInterceptor from './interceptors/api.interceptor'
+import ApiErrorInterceptor from './interceptors/errors.interceptor'
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -11,5 +12,6 @@ export const appConfig: ApplicationConfig = {
     provideClientHydration(),
     provideHttpClient(withFetch(), withInterceptorsFromDi()),
     { provide: HTTP_INTERCEPTORS, useClass: ApiInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: ApiErrorInterceptor, multi: true },
   ],
 }
