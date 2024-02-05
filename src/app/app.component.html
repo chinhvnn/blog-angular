@@ -1,8 +1,12 @@
-<app-header></app-header>
-<main>
-  <app-left-sidebar></app-left-sidebar>
-  <div class="content-wrapper flex-1 p-5 border-solid border shadow-lg">
+<app-header *ngIf="routerUrl !== '/login'"></app-header>
+<main class="bg-slate-100">
+  <app-left-sidebar
+    [innerWidth]="innerWidth"
+    [routerUrl]="routerUrl"
+    *ngIf="routerUrl !== '/login'"
+  ></app-left-sidebar>
+  <div class="content-wrapper bg-white flex-1 p-5 mr-3 mb-3 border-solid border shadow-lg">
     <router-outlet></router-outlet>
   </div>
-  <app-right-sidebar></app-right-sidebar>
+  <app-right-sidebar [innerWidth]="innerWidth" *ngIf="routerUrl !== '/login'"></app-right-sidebar>
 </main>

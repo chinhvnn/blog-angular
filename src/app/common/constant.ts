@@ -8,3 +8,7 @@ export const API_STATUS = {
 }
 
 export const TOKEN_LOCAL_KEY = 'token'
+
+export enum MessageRes {
+  JWTErrors = 'JWT errors',
+}

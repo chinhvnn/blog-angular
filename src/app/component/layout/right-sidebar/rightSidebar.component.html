@@ -1,8 +1,12 @@
-<div class="right-sidebar-wrapper border border-solid shadow-md w-48 mx-3">
+<div
+  class="right-sidebar-wrapper bg-white border border-solid shadow-md w-60 mr-3"
+  *ngIf="routerUrl === '/' || routerUrl.includes('/blog/')"
+>
   <div class="newest-topic-wrapper">
     <div class="newest-item flex align-middle hover:bg-slate-500 hover:cursor-pointer" routerLink="user">
       <div class="newest-item__logo p-2">***</div>
       <div class="newest-item__name py-2">Dashboard</div>
+      {{ innerWidth }}
     </div>
   </div>
 </div>
