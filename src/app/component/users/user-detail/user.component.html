@@ -58,21 +58,36 @@
       </div>
     </div>
   </div>
-  <div class="basic-info grid grid-cols-12" *ngIf="isEditMode">
-    <form action="" method="post">
-      <div class="name flex items-center col-span-12 sm:col-span-12 md:col-span-6 h-14 mr-5">
+  <div class="basic-info" *ngIf="isEditMode">
+    <form
+      action="api/v1/admin/upload-file/profile-image"
+      method="post"
+      id="profile-image"
+      type="multipart/form-data"
+    >
+      <div class="name flex flex-wrap items-center h-14 mr-5">
         <div class="label mr-2">Profile:</div>
-        <div class="value-edit">
+        <div class="value-edit m-2 ml-0">
           <input type="file" (change)="onFileSelected($event)" #fileUpload />
           <!-- <div (click)="fileUpload.click()">Click upload</div> -->
         </div>
-        <div>
+        <div class="m-2 ml-0">
           <button
-            class="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded"
+            class="bg-transparent text-blue-700 font-semibold py-2 px-4 border border-blue-500 rounded"
+            [class]="
+              isDisableUpload
+                ? 'text-gray-400'
+                : 'hover:bg-blue-500 hover:text-white hover:border-transparent'
+            "
             (click)="onUploadProfileImage($event)"
+            [disabled]="isDisableUpload"
           >
-            Click upload
+            Click to upload
           </button>
+          <div class="upload-error text-red-700">{{ uploadError }}</div>
+          <div class="upload-error text-green-400" *ngIf="isDisableUpload && !uploadError">
+            Upload success
+          </div>
         </div>
       </div>
     </form>
