@@ -1,19 +1,27 @@
-<div class="left-sidebar-wrapper h-scree w-48 p-3">
+<div class="left-sidebar-wrapper w-3">
   <div class="nav-wrapper">
-    <div class="nav-item flex items-center hover:bg-slate-500 hover:cursor-pointer rounded-md" routerLink="">
-      <div class="nav-item__logo p-1 w-7 h-7 rounded-full">
+    <div
+      class="nav-item flex items-center rounded-md transition-colors"
+      [ngClass]="routerUrl === '/' ? 'active bg-orange-300' : 'hover:bg-slate-200 hover:cursor-pointer'"
+      routerLink=""
+    >
+      <div class="nav-item__logo w-7 h-7 p-1 mx-2 rounded-full">
         <img src="assets/svg/home.svg" alt="" srcset="" />
       </div>
-      <div class="nav-item__name py-2 pl-3">Home</div>
+      <div class="nav-item__name p-2">Home</div>
     </div>
-    <div class="nav-gap pt-5">
+    <div class="nav-gap mt-5 mb-1">
       <div class="font-thin text-sm">Administrations</div>
     </div>
-    <div class="nav-item flex items-center hover:bg-slate-500 hover:cursor-pointer rounded-md" routerLink="users">
-      <div class="nav-item__logo p-1 w-7 h-7 rounded-full">
+    <div
+      class="nav-item flex items-center rounded-md transition-colors"
+      [ngClass]="routerUrl === '/users' ? 'active bg-orange-300' : 'hover:bg-slate-200 hover:cursor-pointer'"
+      routerLink="users"
+    >
+      <div class="nav-item__logo w-7 h-7 p-1 mx-2 rounded-full">
         <img src="assets/svg/user.svg" alt="" srcset="" />
       </div>
-      <div class="nav-item__name py-2 pl-3">Users</div>
+      <div class="nav-item__name p-2">Users</div>
     </div>
   </div>
 </div>

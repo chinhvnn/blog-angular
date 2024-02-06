@@ -16,7 +16,7 @@
   "tabWidth": 2,
   "useTabs": false,
   "embeddedLanguageFormatting": "auto",
-  "printWidth": 120,
+  "printWidth": 110,
   "editor.formatOnType": true,
   "spaceBeforeFunctionParen": false
 }
