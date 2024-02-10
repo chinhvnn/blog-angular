@@ -21,7 +21,7 @@ export default class User {
   protected isEditMode = false
   protected uploadError = ''
   protected isDisableUpload = false
-  user$: Observable<{ isLoading: boolean; user: IUser }>
+  public user$: Observable<{ isLoading: boolean; user: IUser }>
 
   protected profileImage = {} as File
   protected userName = new FormControl('')
@@ -37,27 +37,9 @@ export default class User {
   ngOnInit(): void {
     //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
     //Add 'implements OnInit' to the class.
-
     this.router.paramMap.subscribe((param) => {
       return this.store.dispatch(UserAction.GetUser({ id: param.get('id') || '' }))
     })
-    // this.test$.subscribe((res) => console.log(res)) // 2
-    // setTimeout(
-    //   () =>
-    //     console.log(
-    //       '111',
-    //       this.test$.subscribe((res) => console.log(res)),
-    //     ),
-    //   2000,
-    // ) // 4
-    // console.log('1111 ressss') // 3
-
-    // this.userService.getUserById('65966aa5815e66030ca27ab8').subscribe((res) => {
-    //   if (res.data) {
-    //     this.user = res.data
-    //     this.userName.setValue(this.user.name)
-    //   }
-    // })
   }
 
   ngOnChanges(changes: SimpleChanges): void {
