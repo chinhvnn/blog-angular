@@ -9,6 +9,10 @@ import { API_V1_URL } from '../common/router'
 export default class UserService {
   constructor(private readonly http: HttpClient) {}
 
+  getAuthUser(): Observable<any> {
+    return this.http.get<any>(`${API_V1_URL.GetAuthUser}`)
+  }
+
   getUsers({ currentPage }: any): Observable<any> {
     return this.http.get<any>(API_V1_URL.GetUsers).pipe()
   }

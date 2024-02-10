@@ -1,8 +1,21 @@
 <div class="header-wrapper fixed w-screen flex justify-between bg-white shadow-lg">
   <div class="menu">MENU</div>
-  <div class="logo">LOGO</div>
-  <div class="account flex items-center px-3 hover:cursor-pointer" routerLink="users/{{ userId }}">
-    <div class="icon h-8 w-8 border border-solid rounded-full mr-3"></div>
-    <div class="name max-w-32 truncate">Chinh fsd fsdf sdf sdf dsf sdf sdf ds</div>
+  <div class="right-menu flex items-center">
+    <div class="create-post-btn">
+      <button
+        class="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded"
+      >
+        Create post
+      </button>
+    </div>
+    <div
+      class="account flex items-center px-3 hover:cursor-pointer"
+      routerLink="users/{{ app$.authUser?._id }}"
+    >
+      <div class="icon h-8 w-8 border border-solid rounded-full mr-3 overflow-hidden">
+        <img class="w-full h-full object-contain" [src]="app$.authUser.profileImgUrl" alt="" srcset="" />
+      </div>
+      <div class="name max-w-32 truncate">{{ app$.authUser.email }}</div>
+    </div>
   </div>
 </div>

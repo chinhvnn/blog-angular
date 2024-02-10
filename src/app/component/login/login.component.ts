@@ -18,7 +18,11 @@ export default class LoginComponent {
   public remember = new FormControl()
   public errors = ''
 
-  constructor(public auth: AuthServices, private readonly router: Router, private readonly jwtService: JWTService) {
+  constructor(
+    public auth: AuthServices,
+    private readonly router: Router,
+    private readonly jwtService: JWTService,
+  ) {
     if (this.auth.isAuthenticated()) {
       this.router.navigate([''])
     }
@@ -30,7 +34,7 @@ export default class LoginComponent {
       this.auth
         .login({ email: this.email.value, password: this.password.value, remember: this.remember.value })
         .subscribe((res: any) => {
-          if (res.status === API_STATUS.SUCCESS && res.token) {
+          if (res.result === API_STATUS.SUCCESS && res.token) {
             this.jwtService.saveToken(res.token)
             this.router.navigate([''])
           } else {

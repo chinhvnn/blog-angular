@@ -1,11 +1,14 @@
 import { Component, SimpleChanges } from '@angular/core'
-import { RouterLink } from '@angular/router'
+import { ActivatedRoute, Router, RouterLink } from '@angular/router'
 import { CommonModule } from '@angular/common'
 import { FormControl, ReactiveFormsModule } from '@angular/forms'
+import { Store } from '@ngrx/store'
+import { Observable } from 'rxjs'
 
 import UserService from '../../../services/user.services'
 import { IUser, IUserInput } from '../../../common/interfaces'
 import { API_STATUS, TOKEN_LOCAL_KEY } from '../../../common/constant'
+import { UserAction } from '../user.action'
 
 @Component({
   selector: 'app-user-detail',
@@ -14,26 +17,47 @@ import { API_STATUS, TOKEN_LOCAL_KEY } from '../../../common/constant'
   standalone: true,
 })
 export default class User {
-  public user = {} as IUser
   protected isLoading = false
   protected isEditMode = false
   protected uploadError = ''
   protected isDisableUpload = false
+  user$: Observable<{ isLoading: boolean; user: IUser }>
 
   protected profileImage = {} as File
   protected userName = new FormControl('')
 
-  constructor(private readonly userService: UserService) {}
+  constructor(
+    private readonly userService: UserService,
+    private readonly router: ActivatedRoute,
+    protected store: Store<any>,
+  ) {
+    this.user$ = store.select('user')
+  }
 
   ngOnInit(): void {
     //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
     //Add 'implements OnInit' to the class.
-    this.userService.getUserById('65966aa5815e66030ca27ab8').subscribe((res) => {
-      if (res.data) {
-        this.user = res.data
-        this.userName.setValue(this.user.name)
-      }
+
+    this.router.paramMap.subscribe((param) => {
+      return this.store.dispatch(UserAction.GetUser({ id: param.get('id') || '' }))
     })
+    // this.test$.subscribe((res) => console.log(res)) // 2
+    // setTimeout(
+    //   () =>
+    //     console.log(
+    //       '111',
+    //       this.test$.subscribe((res) => console.log(res)),
+    //     ),
+    //   2000,
+    // ) // 4
+    // console.log('1111 ressss') // 3
+
+    // this.userService.getUserById('65966aa5815e66030ca27ab8').subscribe((res) => {
+    //   if (res.data) {
+    //     this.user = res.data
+    //     this.userName.setValue(this.user.name)
+    //   }
+    // })
   }
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -43,7 +67,6 @@ export default class User {
 
   onUploadProfileImage(e: any): void {
     e.preventDefault()
-    console.log('111 this.profileImg', this.profileImage)
 
     if (!this.isEditMode || !this.profileImage) return
     const form = document.querySelector('form#profile-image') as any
@@ -63,7 +86,6 @@ export default class User {
       }
       fetch(url, fetchOptions)
         .then((res: any) => {
-          console.log('res', res)
           if (res.status === 200) {
             this.uploadError = ''
             this.isDisableUpload = true
@@ -89,8 +111,12 @@ export default class User {
 
   onEditClicked(e: MouseEvent): void {
     if (this.isEditMode) {
+      let _id = ''
+      this.user$.subscribe((data) => {
+        _id = data.user._id
+      })
       const userInput: IUserInput = {
-        _id: this.user._id,
+        _id,
         name: this.userName.value || '',
         //...etc
       }

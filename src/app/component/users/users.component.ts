@@ -1,7 +1,9 @@
 import { Component, SimpleChanges } from '@angular/core'
+import { CommonModule } from '@angular/common'
+
 import UserService from '../../services/user.services'
 import { API_STATUS } from '../../common/constant'
-import { CommonModule } from '@angular/common'
+import { userReducer } from './user.reducer'
 
 @Component({
   selector: 'app-user',
@@ -19,9 +21,8 @@ export default class Users {
     //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
     //Add 'implements OnInit' to the class.
     this.userService.getUsers(1).subscribe((res) => {
-      if (res.status === API_STATUS.SUCCESS && res?.data?.users) {
+      if (res.result === API_STATUS.SUCCESS && res?.data?.users) {
         this.userData = res.data.users
-        console.log('111 this.userData', this.userData)
       }
     })
   }

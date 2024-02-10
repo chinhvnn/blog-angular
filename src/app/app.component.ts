@@ -1,12 +1,15 @@
 import { Component, HostListener, OnInit } from '@angular/core'
 import { CommonModule } from '@angular/common'
 import { NavigationEnd, Router, RouterLink, RouterOutlet } from '@angular/router'
-import { HttpClientModule } from '@angular/common/http'
+import { Observable, delay, filter } from 'rxjs'
+import { Store } from '@ngrx/store'
+
 import Header from './component/layout/header/header.component'
 import LeftSidebar from './component/layout/left-sidebar/leftSidebar.component'
 import RightSidebar from './component/layout/right-sidebar/rightSidebar.component'
 import WindowRefService from './services/windowRef.service'
-import { delay, filter } from 'rxjs'
+import { IUser } from './common/interfaces'
+import { AppAction } from './store/app.action'
 
 @Component({
   selector: 'app-root',
@@ -17,8 +20,15 @@ import { delay, filter } from 'rxjs'
 export class AppComponent implements OnInit {
   public innerWidth: any
   public routerUrl: any
+  public app$: Observable<{ authUser: IUser }>
 
-  constructor(private readonly router: Router, public windowRef: WindowRefService) {}
+  constructor(
+    private readonly router: Router,
+    public windowRef: WindowRefService,
+    protected store: Store<any>,
+  ) {
+    this.app$ = store.select('app')
+  }
 
   ngOnInit(): void {
     //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
@@ -28,6 +38,7 @@ export class AppComponent implements OnInit {
       this.innerWidth = window.innerWidth
     } catch (error) {}
 
+    // Get router url
     this.router.events
       .pipe(
         delay(10),
@@ -36,6 +47,9 @@ export class AppComponent implements OnInit {
       .subscribe((event: any) => {
         this.routerUrl = event.url
       })
+
+    // Get User login
+    this.store.dispatch(AppAction.GetAuth())
   }
 
   @HostListener('window:resize', ['$event'])
