@@ -1,4 +1,4 @@
-<div class="user-detail-wrapper">
+<div class="user-detail-wrapper" *ngIf="!(user$ | async)?.isLoading">
   <div class="header flex justify-between items-center h-16 mb-5">
     <div class="title text-2xl font-medium">User detail</div>
     <div class="flex">
@@ -98,3 +98,4 @@
     </form>
   </div>
 </div>
+<loading [isLoading]="!!(user$ | async)?.isLoading"></loading>

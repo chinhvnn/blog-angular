@@ -9,15 +9,15 @@ import UserService from '../../../services/user.services'
 import { IUser, IUserInput } from '../../../common/interfaces'
 import { API_STATUS, TOKEN_LOCAL_KEY } from '../../../common/constant'
 import { UserAction } from '../user.action'
+import Loading from '../../layout/loading.component'
 
 @Component({
   selector: 'app-user-detail',
   templateUrl: './user.component.html',
-  imports: [RouterLink, CommonModule, ReactiveFormsModule],
+  imports: [RouterLink, CommonModule, ReactiveFormsModule, Loading],
   standalone: true,
 })
 export default class User {
-  protected isLoading = false
   protected isEditMode = false
   protected uploadError = ''
   protected isDisableUpload = false

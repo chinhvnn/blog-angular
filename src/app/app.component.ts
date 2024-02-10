@@ -10,17 +10,18 @@ import RightSidebar from './component/layout/right-sidebar/rightSidebar.componen
 import WindowRefService from './services/windowRef.service'
 import { IUser } from './common/interfaces'
 import { AppAction } from './store/app.action'
+import Loading from './component/layout/loading.component'
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [CommonModule, RouterOutlet, Header, LeftSidebar, RightSidebar],
+  imports: [CommonModule, RouterOutlet, Header, LeftSidebar, RightSidebar, Loading],
   templateUrl: './app.component.html',
 })
 export class AppComponent implements OnInit {
   public innerWidth: any
   public routerUrl: any
-  public app$: Observable<{ authUser: IUser }>
+  public app$: Observable<{ isLoading: boolean; authUser: IUser }>
 
   constructor(
     private readonly router: Router,
