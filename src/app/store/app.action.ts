@@ -4,4 +4,5 @@ export const AppAction = {
   GetAuth: createAction('Auth/Get'),
   GetAuthSuccess: createAction('Auth/GetSuccess', props<any>()),
   GetAuthFail: createAction('Auth/GetFail', props<any>()),
+  ResetAuth: createAction('Auth/Reset'),
 }

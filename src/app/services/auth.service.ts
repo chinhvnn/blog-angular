@@ -20,4 +20,8 @@ export default class AuthServices {
   public login(body: I.ILoginInput): Observable<any> {
     return this.http.post<any>('login', body).pipe()
   }
+
+  public logout(body: any): Observable<any> {
+    return this.http.post<any>('admin/logout', body).pipe()
+  }
 }

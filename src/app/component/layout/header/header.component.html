@@ -1,4 +1,4 @@
-<div class="header-wrapper fixed w-screen flex justify-between bg-white shadow-lg">
+<div class="header-wrapper fixed w-screen z-30 flex justify-between bg-white shadow-lg">
   <div class="menu">MENU</div>
   <div class="right-menu flex items-center">
     <div class="create-post-btn">
@@ -9,13 +9,36 @@
       </button>
     </div>
     <div
-      class="account flex items-center px-3 hover:cursor-pointer"
-      routerLink="users/{{ app$.authUser?._id }}"
+      class="account flex items-center px-3 hover:cursor-pointer hover:text-indigo-800"
+      data-dropdown-toggle="dropdown-user"
+      id="dropdown-user-btn"
     >
       <div class="icon h-8 w-8 border border-solid rounded-full mr-3 overflow-hidden">
         <img class="w-full h-full object-contain" [src]="app$.authUser.profileImgUrl" alt="" srcset="" />
       </div>
       <div class="name max-w-32 truncate">{{ app$.authUser.email }}</div>
+    </div>
+    <!-- Dropdown menu -->
+    <div
+      id="dropdown-user"
+      class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700"
+    >
+      <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdown-user-btn">
+        <li>
+          <span
+            routerLink="users/{{ app$.authUser?._id }}"
+            class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white hover:cursor-pointer"
+            >Settings</span
+          >
+        </li>
+        <li>
+          <a
+            (click)="onLogout()"
+            class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white hover:cursor-pointer"
+            >Sign out</a
+          >
+        </li>
+      </ul>
     </div>
   </div>
 </div>

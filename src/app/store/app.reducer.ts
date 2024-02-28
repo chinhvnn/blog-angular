@@ -8,6 +8,9 @@ export const initialState = {
 
 export const appReducer = createReducer(
   initialState,
+  on(AppAction.ResetAuth, (state: any, action) => {
+    return { ...state, isLoading: true, authUser: {} }
+  }),
   on(AppAction.GetAuth, (state: any, action) => {
     return { ...state, isLoading: true, authUser: {} }
   }),
