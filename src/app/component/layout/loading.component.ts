@@ -5,10 +5,7 @@ import { Component, Input } from '@angular/core'
   standalone: true,
   selector: 'loading',
   imports: [CommonModule],
-  template: `<div
-    class="page-loading absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"
-    *ngIf="isLoading"
-  >
+  template: `<div class="page-loading absolute top-1/2 left-[calc(50%_+_100px)]" *ngIf="isLoading">
     <svg
       class="animate-spin h-8 w-8"
       height="200px"
@@ -61,5 +58,5 @@ import { Component, Input } from '@angular/core'
   </div>`,
 })
 export default class Loading {
-  @Input() isLoading = false
+  @Input() isLoading = true
 }
