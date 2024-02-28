@@ -1,23 +1,39 @@
-<div class="login-wrapper">
-  <div class="login-header">Login</div>
-  <div class="login-form">
-    <div class="login-form__errors">{{ errors }}</div>
-    <div class="login-form__email">
-      <input type="text" class="form-control" placeholder="Email" [formControl]="email" />
-      <span class="login-form__email__note"></span>
+<div>
+  <div class="login-title text-center mt-10 text-3xl">Chinh's blog</div>
+  <div class="login-wrapper">
+    <div class="login-header">Login</div>
+    <div class="login-form">
+      <div class="login-form__errors">{{ errors }}</div>
+      <div class="login-form__email">
+        <input type="text" class="form-control" placeholder="Email" [formControl]="email" />
+        <span class="login-form__email__note"></span>
+      </div>
+      <div class="login-form__password">
+        <input type="password" class="form-control" placeholder="Password" [formControl]="password" />
+        <span class="login-form__password__note"></span>
+      </div>
+      <div class="login-form__remember">
+        <input type="checkbox" id="remember" class="" [formControl]="remember" class="mr-2" />
+        <label for="remember">Remember password</label>
+      </div>
+      <div class="login-form__submit-btn">
+        <button type="button" class="button-1" (click)="handleLoginSubmit()">Submit</button>
+      </div>
     </div>
-    <div class="login-form__password">
-      <input type="password" class="form-control" placeholder="Password" [formControl]="password" />
-      <span class="login-form__password__note"></span>
+    <!-- <div class="login-forgot">Forgot email or password</div> -->
+    <div
+      class="login-need-signup inline-block cursor-pointer hover:text-indigo-800"
+      data-tooltip-target="tooltip-warning-signup"
+    >
+      Signup
     </div>
-    <div class="login-form__remember">
-      <input type="checkbox" id="remember" class="" [formControl]="remember" />
-      <label for="remember">Remember password</label>
-    </div>
-    <div class="login-form__submit-btn">
-      <button type="button" class="button-1" (click)="handleLoginSubmit()">Submit</button>
+    <div
+      id="tooltip-warning-signup"
+      role="tooltip"
+      class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700"
+    >
+      Please send a message to admin
+      <div class="tooltip-arrow" data-popper-arrow></div>
     </div>
   </div>
-  <div class="login-forgot">Forgot email or password</div>
-  <div class="login-need-signup">Signup</div>
 </div>
