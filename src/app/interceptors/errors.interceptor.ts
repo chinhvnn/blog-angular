@@ -2,8 +2,9 @@ import { HttpEvent, HttpHandler, HttpHeaders, HttpInterceptor, HttpRequest } fro
 import { Injectable } from '@angular/core'
 import { Router } from '@angular/router'
 import { Observable, catchError, throwError } from 'rxjs'
+
 import JWTService from '../services/jwt.service'
-import { MessageRes } from '../common/constant'
+import { API_STATUS, MessageRes } from '../common/constant'
 
 @Injectable({ providedIn: 'root' })
 export default class ApiErrorInterceptor implements HttpInterceptor {
@@ -12,7 +13,7 @@ export default class ApiErrorInterceptor implements HttpInterceptor {
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     return next.handle(req).pipe(
       catchError((err: any) => {
-        if (err?.error?.message === MessageRes.JWTErrors) {
+        if (err?.error?.message === MessageRes.JWTErrors || (err.status === 500 && !err?.result)) {
           this.jwtService.destroyToken()
           this.router.navigate(['login'])
         }
